@@ -183,8 +183,8 @@ if args.format == "kml":
                         
     for i in range(0, w*2+1, args.display_period):
         for j in range(0, h*2+1, args.display_period):
-            lat, long = utm.to_latlon(east_start+i*1000, north_start+j*1000, utm_zone, utm_letter)
-            kml.newpoint(name=f"{east_start+i*1000} {north_start+j*1000}", description=f"{east_start+i*1000} {north_start+j*1000}",
+            lat, long = utm.to_latlon((e_start+i)*1000, (n_start+j)*1000, utm_zone, utm_letter)
+            kml.newpoint(name=f"{utm_zone}{utm_letter} {e_start+i} {n_start+j} ", description=f"{utm_zone}{utm_letter} {e_start+i} {n_start+j}",
                          coords=[(long,lat)])
     
     if args.output:
