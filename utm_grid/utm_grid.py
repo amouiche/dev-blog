@@ -31,12 +31,19 @@ def ZONE_type(text):
     if z < 1 or z > 60:
         raise ValueError("Zone must be an integer value between 1 and 60")
     return z
+    
+def KM_type(text):
+    s = int(text)
+    if s <= 0:
+        raise ValueError("Invalid KM value")
+    return s
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-W", "--width", metavar="KM", default=10, type=int, help="Width of the Grid in km")
-parser.add_argument("-H", "--height", metavar="KM", default=10, type=int, help="Height of the Grid in km")
-
 parser.add_argument("CENTER_COORD", metavar="lat,long", type=CENTER_COORD_type, help="Center GPS of the grid (will be rounded to the nearest UTM 1km grid location). You can use '/' prefix if the latitude is negative (ex: /-45.0,1.0")
+parser.add_argument("-W", "--width", metavar="KM", default=10, type=KM_type, help="Width of the Grid in km (default 10)")
+parser.add_argument("-H", "--height", metavar="KM", default=10, type=KM_type, help="Height of the Grid in km (default 10)")
+parser.add_argument("-q", "--square-size", metavar="KM", default=1, type=KM_type, help="size of each square in km (default 1)")
+
 parser.add_argument("-z", "--zone", metavar="ZONE", type=ZONE_type, help="Force a specific UTM zone")
 
 parser.add_argument("-p", "--display-period", metavar="PERIOD", type=int, default=10, help="Display UTM coords in the grid every PERIOD km")
@@ -58,19 +65,20 @@ print(f"UTM zone {utm_zone}{utm_letter}")
 
 print("Provided center:", int(east), int(north))
 # round to neareast km UTM grid location
-e = int((east+500)/1000)
-n = int((north+500)/1000)
-print("Grid center:    ", e*1000, n*1000)
+q = args.square_size
+e = int((east+500*q)/(1000*q))
+n = int((north+500*q)/(1000*q))
+print("Grid center:    ", e*q*1000, n*q*1000)
 
-w = (args.width+1)//2
-h = (args.height+1)//2
+w = (args.width+q)//(2*q)
+h = (args.height+q)//(2*q)
 e_start = e - w
 e_end = e + w
 n_start = n - h
 n_end = n + h
     
 
-utm_track = []  # path to draw in 1km grid. each steps are spaced only 1km east or 1km north from previous step
+utm_track = []  # path to draw in 'q' km grid. each steps are spaced only 'q'km east or 'q'km north from previous step
 
 def goto(e,n):
     """
@@ -126,8 +134,8 @@ for n in range(n_start, n_end+1):
 # convert UTM 1km grid track to GPS coords track
 gps_track = [] # (long, lat) points
 for e,n in utm_track:
-    e *= 1000
-    n *= 1000
+    e *= 1000 * q
+    n *= 1000 * q
     lat, long = utm.to_latlon(e, n, utm_zone, utm_letter)
     gps_track.append((long, lat))
 
@@ -145,9 +153,6 @@ if not args.format:
     exit(1)
 
 
-
-east_start = e_start * 1000
-north_start = n_start * 1000
 
 if args.format == "geojson":
     try:
@@ -183,8 +188,8 @@ if args.format == "kml":
                         
     for i in range(0, w*2+1, args.display_period):
         for j in range(0, h*2+1, args.display_period):
-            lat, long = utm.to_latlon((e_start+i)*1000, (n_start+j)*1000, utm_zone, utm_letter)
-            kml.newpoint(name=f"{utm_zone}{utm_letter} {e_start+i} {n_start+j} ", description=f"{utm_zone}{utm_letter} {e_start+i} {n_start+j}",
+            lat, long = utm.to_latlon((e_start+i)*1000*q, (n_start+j)*1000*q, utm_zone, utm_letter)
+            kml.newpoint(name=f"{utm_zone}{utm_letter} {(e_start+i)*q} {(n_start+j)*q} ", description=f"{utm_zone}{utm_letter} {(e_start+i)*q} {(n_start+j)*q}",
                          coords=[(long,lat)])
     
     if args.output:
