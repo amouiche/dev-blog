@@ -16,33 +16,51 @@ import utm
 import math
 import os
 
-
 def CENTER_COORD_type(text):
+    # remove first char if this one is here to hide the first '-' is case of negative latitude
+    if text[0:1] in "=/(,:_":
+        text = text[1:]
     lat,long = text.split(",")
     lat = float(lat)
     long = float(long)
     return lat, long
+    
+    
+def ZONE_type(text):
+    z = int(text)
+    if z < 1 or z > 60:
+        raise ValueError("Zone must be an integer value between 1 and 60")
+    return z
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-W", "--width", metavar="KM", default=10, type=int, help="Width of the Grid in km")
 parser.add_argument("-H", "--height", metavar="KM", default=10, type=int, help="Height of the Grid in km")
 
-parser.add_argument("CENTER_COORD", metavar="lat,long", type=CENTER_COORD_type, help="Center GPS of the grid (will be rounded to the nearest UTM 1km grid location)")
+parser.add_argument("CENTER_COORD", metavar="lat,long", type=CENTER_COORD_type, help="Center GPS of the grid (will be rounded to the nearest UTM 1km grid location). You can use '/' prefix if the latitude is negative (ex: /-45.0,1.0")
+parser.add_argument("-z", "--zone", metavar="ZONE", type=ZONE_type, help="Force a specific UTM zone")
+
+parser.add_argument("-p", "--display-period", metavar="PERIOD", type=int, default=10, help="Display UTM coords in the grid every PERIOD km")
+
+
 
 parser.add_argument("-o", "--output", metavar="FILE", help="Save result to this file")
 parser.add_argument("-f", "--format", choices=["geojson", "kml"], help="File format (if not provided through filename extention)")
 args = parser.parse_args()
 
+lat, long = args.CENTER_COORD
+[east, north, utm_zone, utm_letter] = utm.from_latlon(lat, long, force_zone_number=args.zone)
 
-[east, north, utm_zone, utm_letter] = utm.from_latlon(*args.CENTER_COORD)
+
+
+
 
 print(f"UTM zone {utm_zone}{utm_letter}")
 
-#print("center:", east, north)
+print("Provided center:", int(east), int(north))
 # round to neareast km UTM grid location
 e = int((east+500)/1000)
 n = int((north+500)/1000)
-#print("narrow:", east, north)
+print("Grid center:    ", e*1000, n*1000)
 
 w = (args.width+1)//2
 h = (args.height+1)//2
@@ -156,16 +174,18 @@ if args.format == "kml":
     try:
         import simplekml
     except ModuleNotFoundError:
-        print("geojson python module not installed.")
+        print("simplekml python module not installed.")
         exit(1)
     kml = simplekml.Kml()
     
     lin = kml.newlinestring(name=f"UTM {utm_zone}{utm_letter}", description=f"UTM Grid {utm_zone}{utm_letter}",
                         coords=gps_track)
                         
-    lat, long = utm.to_latlon(east_start, north_start, utm_zone, utm_letter)
-    kml.newpoint(name=f"{east_start} {north_start}", description=f"{east_start} {north_start}",
-                   coords=[(long,lat)])
+    for i in range(0, w*2+1, args.display_period):
+        for j in range(0, h*2+1, args.display_period):
+            lat, long = utm.to_latlon(east_start+i*1000, north_start+j*1000, utm_zone, utm_letter)
+            kml.newpoint(name=f"{east_start} {north_start}", description=f"{east_start} {north_start}",
+                         coords=[(long,lat)])
     
     if args.output:
         print(f"Write KML output to {args.output}")
