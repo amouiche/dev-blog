@@ -52,7 +52,7 @@ parser.add_argument("-m", "--meridien", action="store_true", help="Draw one meri
 
 
 parser.add_argument("-o", "--output", metavar="FILE", help="Save result to this file")
-parser.add_argument("-f", "--format", choices=["geojson", "kml"], help="File format (if not provided through filename extention)")
+parser.add_argument("-f", "--format", choices=["geojson", "kml", "gpx"], help="File format (if not provided through filename extention)")
 args = parser.parse_args()
 
 lat, long = args.CENTER_COORD
@@ -70,6 +70,8 @@ q = args.square_size
 e = int((east+500*q)/(1000*q))
 n = int((north+500*q)/(1000*q))
 print("Grid center:    ", e*q*1000, n*q*1000)
+
+grid_center = utm.to_latlon(e*1000*q, n*1000*q, utm_zone, utm_letter)
 
 w = (args.width+q)//(2*q)
 h = (args.height+q)//(2*q)
@@ -145,9 +147,17 @@ lat_min = min([lat for lat, long in gps_track])
 lat_max = max([lat for lat, long in gps_track])
 
 
+gps_points = [] # (lat, long, text)
+for i in range(0, w*2+1, args.display_period):
+    for j in range(0, h*2+1, args.display_period):
+        lat, long = utm.to_latlon((e_start+i)*1000*q, (n_start+j)*1000*q, utm_zone, utm_letter)
+        gps_points.append((lat, long, f"{utm_zone}{utm_letter} {(e_start+i)*q} {(n_start+j)*q}"))
+
+
+
 if args.output and (not args.format):
     ext = os.path.splitext(args.output)[1][1:].lower()
-    if ext not in ["geojson", "kml"]:
+    if ext not in ["geojson", "kml", "gpx"]:
         print(f"Don't know how to manage format {ext}. abort.")
         exit(1)
     args.format = ext
@@ -173,7 +183,7 @@ if args.format == "geojson":
         lat1, long1 = lat2, long2
         
     if args.meridien:
-        lat, long = args.CENTER_COORD
+        lat, long = grid_center
         geo_items.append(geojson.LineString([(long, lat_max), (long, lat_min)]))
 
     geo_collection = geojson.GeometryCollection(geo_items)
@@ -183,6 +193,46 @@ if args.format == "geojson":
     else:
         print(geojson.dumps(geo_collection))
 
+
+if args.format == "gpx":
+    try:
+        import gpxpy
+        import gpxpy.gpx
+    except ModuleNotFoundError:
+        print("gpxpy python module not installed.")
+        exit(1)
+        
+    gpx = gpxpy.gpx.GPX()
+
+    gpx_track = gpxpy.gpx.GPXTrack()
+    gpx.tracks.append(gpx_track)
+
+    gpx_segment = gpxpy.gpx.GPXTrackSegment()
+    gpx_track.segments.append(gpx_segment)
+
+    for lat, long in gps_track:
+        gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(lat, long))
+        
+    if args.meridien:
+        lat, long = grid_center
+        gpx_segment = gpxpy.gpx.GPXTrackSegment()
+        gpx_track.segments.append(gpx_segment)
+        gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(lat_max, long))
+        gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(lat_min, long))
+
+
+    for lat, long, text in gps_points:
+        wp = gpxpy.gpx.GPXWaypoint(lat, long, name=text, description=text)
+        gpx.waypoints.append(wp)
+            
+    if args.output:
+        print(f"Write GPX output to {args.output}")
+        with open(args.output, "w") as F:
+            F.write(gpx.to_xml())
+    else:
+        print(gpx.to_xml())
+
+
 if args.format == "kml":
     try:
         import simplekml
@@ -191,21 +241,26 @@ if args.format == "kml":
         exit(1)
     kml = simplekml.Kml()
     
-    lin = kml.newlinestring(name=f"UTM {utm_zone}{utm_letter}", description=f"UTM Grid {utm_zone}{utm_letter}",
+    line = kml.newlinestring(name=f"UTM {utm_zone}{utm_letter}", description=f"UTM Grid {utm_zone}{utm_letter}",
                         coords=[(long, lat) for lat,long in gps_track])
+    line.style.linestyle.color = simplekml.Color.blue
+    line.style.linestyle.width = 1
                         
     if args.meridien:
-        lat, long = args.CENTER_COORD
-        kml.newlinestring(name="Meridien", description="Meridien", 
+        lat, long = grid_center
+        line = kml.newlinestring(name="Meridien", description="Meridien", 
             coords=[(long, lat_max), (long, lat_min)])
+        line.style.linestyle.color = simplekml.Color.black
+        line.style.linestyle.width = 2
 
 
-                        
-    for i in range(0, w*2+1, args.display_period):
-        for j in range(0, h*2+1, args.display_period):
-            lat, long = utm.to_latlon((e_start+i)*1000*q, (n_start+j)*1000*q, utm_zone, utm_letter)
-            kml.newpoint(name=f"{utm_zone}{utm_letter} {(e_start+i)*q} {(n_start+j)*q} ", description=f"{utm_zone}{utm_letter} {(e_start+i)*q} {(n_start+j)*q}",
-                         coords=[(long,lat)])
+    for lat, long, text in gps_points:
+        pnt = kml.newpoint(name=text, description=text, coords=[(long,lat)])
+        #pnt.style.iconstyle.scale = 1
+        #pnt.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
+        
+        pnt.style.labelstyle.color = simplekml.Color.blue
+        pnt.style.labelstyle.scale = 1
     
     if args.output:
         print(f"Write KML output to {args.output}")
