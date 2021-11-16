@@ -48,6 +48,7 @@ parser.add_argument("-z", "--zone", metavar="ZONE", type=ZONE_type, help="Force 
 
 parser.add_argument("-p", "--display-period", metavar="PERIOD", type=int, default=10, help="Display UTM coords in the grid every PERIOD km")
 
+parser.add_argument("-m", "--meridien", action="store_true", help="Draw one meridien going through CENTER_COORD")
 
 
 parser.add_argument("-o", "--output", metavar="FILE", help="Save result to this file")
@@ -132,13 +133,16 @@ for n in range(n_start, n_end+1):
 
 
 # convert UTM 1km grid track to GPS coords track
-gps_track = [] # (long, lat) points
+
+gps_track = [] # (lat, long) points
 for e,n in utm_track:
     e *= 1000 * q
     n *= 1000 * q
     lat, long = utm.to_latlon(e, n, utm_zone, utm_letter)
-    gps_track.append((long, lat))
+    gps_track.append((lat, long))
 
+lat_min = min([lat for lat, long in gps_track])
+lat_max = max([lat for lat, long in gps_track])
 
 
 if args.output and (not args.format):
@@ -167,6 +171,10 @@ if args.format == "geojson":
     for (lat2, long2) in gps_track[1:]:
         geo_items.append(geojson.LineString([(long1, lat1), (long2, lat2)]))
         lat1, long1 = lat2, long2
+        
+    if args.meridien:
+        lat, long = args.CENTER_COORD
+        geo_items.append(geojson.LineString([(long, lat_max), (long, lat_min)]))
 
     geo_collection = geojson.GeometryCollection(geo_items)
     if args.output:
@@ -184,7 +192,14 @@ if args.format == "kml":
     kml = simplekml.Kml()
     
     lin = kml.newlinestring(name=f"UTM {utm_zone}{utm_letter}", description=f"UTM Grid {utm_zone}{utm_letter}",
-                        coords=gps_track)
+                        coords=[(long, lat) for lat,long in gps_track])
+                        
+    if args.meridien:
+        lat, long = args.CENTER_COORD
+        kml.newlinestring(name="Meridien", description="Meridien", 
+            coords=[(long, lat_max), (long, lat_min)])
+
+
                         
     for i in range(0, w*2+1, args.display_period):
         for j in range(0, h*2+1, args.display_period):
