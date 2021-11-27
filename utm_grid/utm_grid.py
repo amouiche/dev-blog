@@ -251,7 +251,7 @@ if args.format == "kml":
         line = kml.newlinestring(name="Meridien", description="Meridien", 
             coords=[(long, lat_max), (long, lat_min)])
         line.style.linestyle.color = simplekml.Color.black
-        line.style.linestyle.width = 2
+        line.style.linestyle.width = 1
 
 
     for lat, long, text in gps_points:
@@ -259,7 +259,7 @@ if args.format == "kml":
         #pnt.style.iconstyle.scale = 1
         #pnt.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
         
-        pnt.style.labelstyle.color = simplekml.Color.blue
+        pnt.style.labelstyle.color = simplekml.Color.red
         pnt.style.labelstyle.scale = 1
     
     if args.output:
