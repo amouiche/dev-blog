@@ -1,0 +1,149 @@
+DDR V1.11 f1474cf52f cym 23/05/09-11:02:36
+LPDDR5, 2736MHz
+channel[0] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+channel[1] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+channel[2] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+channel[3] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+Manufacturer ID:0x6
+CH0 RX Vref:29.7%, TX Vref:19.0%,0.0%
+CH1 RX Vref:30.1%, TX Vref:20.0%,0.0%
+CH2 RX Vref:30.5%, TX Vref:20.0%,0.0%
+CH3 RX Vref:29.3%, TX Vref:20.0%,0.0%
+change to F1: 528MHz
+change to F2: 1320MHz
+change to F3: 1968MHz
+change to F0: 2736MHz
+out
+U-Boot SPL board init
+U-Boot SPL rknext-2017.09-7-b7ef317-g2037e13 #runner (Dec 19 2023 - 07:09:19)
+Trying to boot from MMC2
+spl: partition error
+Trying fit image at 0x4000 sector
+## Verified-boot: 0
+## Checking atf-1 0x00040000 ... sha256(7efcd01a0f...) + OK
+## Checking uboot 0x00200000 ... sha256(f2db3ea759...) + OK
+## Checking fdt 0x00324e68 ... sha256(f84d2ac10a...) + OK
+## Checking atf-2 0xff100000 ... sha256(1163474a5b...) + OK
+## Checking atf-3 0x000f0000 ... sha256(da90adf3a4...) + OK
+Jumping to U-Boot(0x00200000) via ARM Trusted Firmware(0x00040000)
+Total: 607.805 ms
+
+INFO:    Preloader serial: 2
+NOTICE:  BL31: v2.3():v2.3-589-g3389cfdda:derrick.huang
+NOTICE:  BL31: Built : 10:14:29, May  9 2023
+INFO:    spec: 0x1
+INFO:    ext 32k is not valid
+INFO:    ddr: stride-en 4CH
+INFO:    GICv3 without legacy support detected.
+INFO:    ARM GICv3 driver initialized in EL3
+INFO:    valid_cpu_msk=0xff bcore0_rst = 0x0, bcore1_rst = 0x0
+INFO:    system boots from cpu-hwid-0
+INFO:    idle_st=0x21fff, pd_st=0x11fff9, repair_st=0xfff70001
+INFO:    dfs DDR fsp_params[0].freq_mhz= 2736MHz
+INFO:    dfs DDR fsp_params[1].freq_mhz= 528MHz
+INFO:    dfs DDR fsp_params[2].freq_mhz= 1320MHz
+INFO:    dfs DDR fsp_params[3].freq_mhz= 1968MHz
+INFO:    BL31: Initialising Exception Handling Framework
+INFO:    BL31: Initializing runtime services
+WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+ERROR:   Error initializing runtime service opteed_fast
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0x200000
+INFO:    SPSR = 0x3c9
+
+
+U-Boot rknext-2017.09-7-b7ef317-g2037e13 #runner (Dec 19 2023 - 07:09:17 +0000)
+
+Model: Radxa ROCK 5 ITX
+PreSerial: 2, raw, 0xfeb50000
+DRAM:  8 GiB
+Sysmem: init
+Relocation Offset: eda38000
+Relocation fdt: eb9f9b38 - eb9fecd0
+CR: M/C/I
+Using default environment
+
+no mmc device at slot 1
+mmc@fe2c0000: 1 (SD), mmc@fe2e0000: 0
+Bootdev(atags): mmc 1
+MMC1: Legacy, 52Mhz
+PartType: EFI
+DM: v2
+No misc partition
+boot mode: None
+No resource partition
+No resource partition
+Failed to load DTB, ret=-19
+No find valid DTB, ret=-22
+Failed to get kernel dtb, ret=-22
+Model: Radxa ROCK 5 ITX
+CLK: (sync kernel. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)
+  b0pll 24000 KHz
+  b1pll 24000 KHz
+  lpll 24000 KHz
+  v0pll 24000 KHz
+  aupll 24000 KHz
+  cpll 1500000 KHz
+  gpll 1188000 KHz
+  npll 24000 KHz
+  ppll 1100000 KHz
+  aclk_center_root 702000 KHz
+  pclk_center_root 100000 KHz
+  hclk_center_root 396000 KHz
+  aclk_center_low_root 500000 KHz
+  aclk_top_root 750000 KHz
+  pclk_top_root 100000 KHz
+  aclk_low_top_root 396000 KHz
+No misc partition
+Net:   No ethernet found.
+Hit Ctrl+C key in 0 seconds to stop autoboot...
+pcie@fe150000: PCIe Linking... LTSSM is 0x0
+pcie@fe150000: PCIe Linking... LTSSM is 0x6
+pcie@fe150000: PCIe Linking... LTSSM is 0x6
+pcie@fe150000: PCIe Linking... LTSSM is 0x210023
+pcie@fe150000: PCIe Link up, LTSSM is 0x230011
+pcie@fe150000: PCIE-0: Link up (Gen3-x2, Bus0)
+pcie@fe150000: invalid flags type!
+
+Device 0: Vendor: 0x144d Rev: 3B4QFXO7 Prod: S64DNL0TB89558H     
+            Type: Hard Disk
+            Capacity: 476940.0 MB = 465.7 GB (976773168 x 512)
+... is now current device
+Scanning nvme 0:1...
+Found U-Boot script /boot/boot.scr
+4231 bytes read in 3 ms (1.3 MiB/s)
+## Executing script at 00500000
+Unknown command 'ÿÿÿÿÿÿÿÿÿÿÿÿîÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿþÿÿÿÿÿÿÿÿÿÿ¿ÿÿûÿÿÿÿÿÿ÷ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿþÿÿÿÿÿÿÿ÷ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿSCRIPT FAILED: continuing...
+switch to partitions #0, OK
+mmc1 is current device
+Scanning mmc 1:2...
+Scanning mmc 1:3...
+Found /boot/extlinux/extlinux.conf
+Retrieving file: /boot/extlinux/extlinux.conf
+1203 bytes read in 5 ms (234.4 KiB/s)
+U-Boot menu
+1:	Debian GNU/Linux 11 (bullseye) 5.10.110-27-rockchip
+2:	Debian GNU/Linux 11 (bullseye) 5.10.110-27-rockchip (rescue target)
+Enter choice: 1:	Debian GNU/Linux 11 (bullseye) 5.10.110-27-rockchip
+Retrieving file: /boot/initrd.img-5.10.110-27-rockchip
+8395683 bytes read in 682 ms (11.7 MiB/s)
+Retrieving file: /boot/vmlinuz-5.10.110-27-rockchip
+28310016 bytes read in 2283 ms (11.8 MiB/s)
+append: root=UUID=8098165e-10da-425e-9c96-b80e0b7a804a console=ttyFIQ0,1500000n8 quiet splash loglevel=4 rw earlycon consoleblank=0 console=tty0 coherent_pool=2M irqchip.gicv3_pseudo_nmi=0 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1
+Retrieving file: /usr/lib/linux-image-5.10.110-27-rockchip/rockchip/rk3588-rock-5-itx.dtb
+250799 bytes read in 73 ms (3.3 MiB/s)
+Fdt Ramdisk skip relocation
+No misc partition
+## Flattened Device Tree blob at 0x08300000
+   Booting using the fdt blob at 0x08300000
+  'reserved-memory' cma: addr=10000000 size=10000000
+  'reserved-memory' ramoops@110000: addr=110000 size=f0000
+   Using Device Tree in place at 0000000008300000, end 00000000083403ae
+Adding bank: 0x00200000 - 0xf0000000 (size: 0xefe00000)
+Adding bank: 0x100000000 - 0x200000000 (size: 0x100000000)
+Adding bank: 0x2f0000000 - 0x300000000 (size: 0x10000000)
+Total: 5879.693 ms
+
+Starting kernel ...
+
+

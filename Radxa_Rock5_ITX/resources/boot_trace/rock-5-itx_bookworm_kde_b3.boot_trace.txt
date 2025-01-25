@@ -1,0 +1,148 @@
+DDR 9fffbe1e78 cym 24/02/04-10:09:20,fwver: v1.16
+LPDDR5, 2400MHz
+channel[0] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+channel[1] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+channel[2] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+channel[3] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+Manufacturer ID:0x6
+CH0 RX Vref:31.0%, TX Vref:19.0%,0.0%
+CH1 RX Vref:31.0%, TX Vref:21.0%,0.0%
+CH2 RX Vref:31.8%, TX Vref:21.0%,0.0%
+CH3 RX Vref:31.0%, TX Vref:20.0%,0.0%
+change to F1: 534MHz
+change to F2: 1320MHz
+change to F3: 1968MHz
+change to F0: 2400MHz
+out
+U-Boot SPL board init
+U-Boot SPL rknext-2017.09-38-22849bf-g97a6fd6 #runner (Nov 11 2024 - 06:42:13)
+Trying to boot from MMC2
+spl: partition error
+Trying fit image at 0x4000 sector
+## Verified-boot: 0
+## Checking atf-1 0x00040000 ... sha256(64122e141b...) + OK
+## Checking uboot 0x00200000 ... sha256(9be0e0f00f...) + OK
+## Checking fdt 0x00329228 ... sha256(6538d5e789...) + OK
+## Checking atf-2 0xff100000 ... sha256(ce8968e34f...) + OK
+## Checking atf-3 0x000f0000 ... sha256(ce48b69fdd...) + OK
+Jumping to U-Boot(0x00200000) via ARM Trusted Firmware(0x00040000)
+Total: 603.449/866.385 ms
+
+INFO:    Preloader serial: 2
+NOTICE:  BL31: v2.3():v2.3-765-g588059758:derrick.huang, fwver: v1.46
+NOTICE:  BL31: Built : 18:13:16, Apr 29 2024
+INFO:    spec: 0x1
+INFO:    code: 0x88
+INFO:    ext 32k is not valid
+INFO:    ddr: stride-en 4CH
+INFO:    GICv3 without legacy support detected.
+INFO:    ARM GICv3 driver initialized in EL3
+INFO:    valid_cpu_msk=0xff bcore0_rst = 0x0, bcore1_rst = 0x0
+INFO:    l3 cache partition cfg-0
+INFO:    system boots from cpu-hwid-0
+INFO:    disable memory repair
+INFO:    idle_st=0x21fff, pd_st=0x11fff9, repair_st=0xfff70001
+INFO:    dfs DDR fsp_params[0].freq_mhz= 2400MHz
+INFO:    dfs DDR fsp_params[1].freq_mhz= 534MHz
+INFO:    dfs DDR fsp_params[2].freq_mhz= 1320MHz
+INFO:    dfs DDR fsp_params[3].freq_mhz= 1968MHz
+INFO:    BL31: Initialising Exception Handling Framework
+INFO:    BL31: Initializing runtime services
+WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+ERROR:   Error initializing runtime service opteed_fast
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0x200000
+INFO:    SPSR = 0x3c9
+
+
+U-Boot rknext-2017.09-38-22849bf-g97a6fd6 #runner (Nov 11 2024 - 06:42:11 +0000)
+
+Model: Radxa ROCK 5 ITX
+MPIDR: 0x81000000
+PreSerial: 2, raw, 0xfeb50000
+DRAM:  8 GiB
+Sysmem: init
+Relocation Offset: eda34000
+Relocation fdt: eb9f8f00 - eb9fecd8
+CR: M/C/I
+Using default environment
+
+DM: v2
+mmc@fe2c0000: 1, mmc@fe2e0000: 0
+Bootdev(assign): mmc 0
+MMC0: HS400 Enhanced Strobe, 200Mhz
+## Unknown partition table type 0
+PartType: <NULL>
+No misc partition
+boot mode: None
+FIT: No boot partition
+Failed to load DTB, ret=-2
+No valid DTB, ret=-22
+Failed to get kernel dtb, ret=-22
+Model: Radxa ROCK 5 ITX
+MPIDR: 0x81000000
+starting USB...
+Bus usb@fc800000: USB EHCI 1.00
+Bus usb@fc840000: USB OHCI 1.0
+Bus usb@fc880000: USB EHCI 1.00
+Bus usb@fc8c0000: USB OHCI 1.0
+scanning bus usb@fc800000 for devices... 2 USB Device(s) found
+scanning bus usb@fc840000 for devices... 1 USB Device(s) found
+scanning bus usb@fc880000 for devices... 1 USB Device(s) found
+scanning bus usb@fc8c0000 for devices... 1 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+No usb mass storage found
+CLK: (sync kernel. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)
+  b0pll 24000 KHz
+  b1pll 24000 KHz
+  lpll 24000 KHz
+  v0pll 24000 KHz
+  aupll 24000 KHz
+  cpll 1500000 KHz
+  gpll 1188000 KHz
+  npll 24000 KHz
+  ppll 1100000 KHz
+  aclk_center_root 702000 KHz
+  pclk_center_root 100000 KHz
+  hclk_center_root 396000 KHz
+  aclk_center_low_root 500000 KHz
+  aclk_top_root 750000 KHz
+  pclk_top_root 100000 KHz
+  aclk_low_top_root 396000 KHz
+Net:   No ethernet found.
+Hit Ctrl+C key in 0 seconds to stop autoboot...
+
+Device 0: unknown device
+switch to partitions #0, OK
+mmc1 is current device
+Scanning mmc 1:2...
+Scanning mmc 1:3...
+Found /boot/extlinux/extlinux.conf
+Retrieving file: /boot/extlinux/extlinux.conf
+1169 bytes read in 6 ms (189.5 KiB/s)
+U-Boot menu
+1:	Debian GNU/Linux 12 (bookworm) 6.1.43-20-rk2312
+2:	Debian GNU/Linux 12 (bookworm) 6.1.43-20-rk2312 (rescue target)
+Enter choice: 1:	Debian GNU/Linux 12 (bookworm) 6.1.43-20-rk2312
+Retrieving file: /boot/initrd.img-6.1.43-20-rk2312
+15717345 bytes read in 1270 ms (11.8 MiB/s)
+Retrieving file: /boot/vmlinuz-6.1.43-20-rk2312
+34980352 bytes read in 2820 ms (11.8 MiB/s)
+append: root=UUID=b6ac4b07-81cc-4770-8a01-7ce41ed0977e console=ttyFIQ0,1500000n8 quiet splash loglevel=4 rw earlycon consoleblank=0 console=tty1 coherent_pool=2M irqchip.gicv3_pseudo_nmi=0 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1
+Retrieving file: /usr/lib/linux-image-6.1.43-20-rk2312/rockchip/rk3588-rock-5-itx.dtb
+273783 bytes read in 75 ms (3.5 MiB/s)
+Fdt Ramdisk skip relocation
+No misc partition
+## Flattened Device Tree blob at 0x08300000
+   Booting using the fdt blob at 0x08300000
+   Using Device Tree in place at 0000000008300000, end 0000000008345d76
+WARNING: could not set reg FDT_ERR_BADOFFSET.
+## reserved-memory:
+  cma: addr=10000000 size=10000000
+  ramoops@110000: addr=110000 size=e0000
+Adding bank: 0x00200000 - 0xf0000000 (size: 0xefe00000)
+Adding bank: 0x100000000 - 0x200000000 (size: 0x100000000)
+Adding bank: 0x2f0000000 - 0x300000000 (size: 0x10000000)
+Total: 10235.75/11159.353 ms
+
+Starting kernel ...

@@ -1,0 +1,157 @@
+DDR 9fffbe1e78 cym 24/02/04-10:09:20,fwver: v1.16
+LPDDR5, 2400MHz
+channel[0] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+channel[1] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+channel[2] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+channel[3] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=2048MB
+Manufacturer ID:0x6
+CH0 RX Vref:31.0%, TX Vref:19.0%,0.0%
+CH1 RX Vref:30.5%, TX Vref:21.0%,0.0%
+CH2 RX Vref:31.8%, TX Vref:20.0%,0.0%
+CH3 RX Vref:31.4%, TX Vref:20.0%,0.0%
+change to F1: 534MHz
+change to F2: 1320MHz
+change to F3: 1968MHz
+change to F0: 2400MHz
+out
+U-Boot SPL board init
+U-Boot SPL 2017.09-armbian-2017.09-S0674-Pc965-H8c72-Ve5ad-Bda0a-R448a (Sep 11 2024 - 17:20:06)
+Trying to boot from MMC2
+spl: partition error
+Trying fit image at 0x4000 sector
+## Verified-boot: 0
+## Checking atf-1 0x00040000 ... sha256(a7d1d8d191...) + OK
+## Checking uboot 0x00200000 ... sha256(36f9c4aad0...) + OK
+## Checking fdt 0x00323440 ... sha256(959e3fb40d...) + OK
+## Checking atf-2 0xff100000 ... sha256(4b2065349b...) + OK
+## Checking atf-3 0x000f0000 ... sha256(aa71013e72...) + OK
+Jumping to U-Boot(0x00200000) via ARM Trusted Firmware(0x00040000)
+Total: 600.929/865.353 ms
+
+INFO:    Preloader serial: 2
+NOTICE:  BL31: v2.3():v2.3-682-g4ca8a8422:derrick.huang, fwver: v1.45
+NOTICE:  BL31: Built : 10:11:21, Dec 27 2023
+INFO:    spec: 0x1
+INFO:    code: 0x88
+INFO:    ext 32k is not valid
+INFO:    ddr: stride-en 4CH
+INFO:    GICv3 without legacy support detected.
+INFO:    ARM GICv3 driver initialized in EL3
+INFO:    valid_cpu_msk=0xff bcore0_rst = 0x0, bcore1_rst = 0x0
+INFO:    l3 cache partition cfg-0
+INFO:    system boots from cpu-hwid-0
+INFO:    disable memory repair
+INFO:    idle_st=0x21fff, pd_st=0x11fff9, repair_st=0xfff70001
+INFO:    dfs DDR fsp_params[0].freq_mhz= 2400MHz
+INFO:    dfs DDR fsp_params[1].freq_mhz= 534MHz
+INFO:    dfs DDR fsp_params[2].freq_mhz= 1320MHz
+INFO:    dfs DDR fsp_params[3].freq_mhz= 1968MHz
+INFO:    BL31: Initialising Exception Handling Framework
+INFO:    BL31: Initializing runtime services
+WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+ERROR:   Error initializing runtime service opteed_fast
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0x200000
+INFO:    SPSR = 0x3c9
+
+
+U-Boot 2017.09-armbian-2017.09-S0674-Pc965-H8c72-Ve5ad-Bda0a-R448a (Sep 11 2024 - 17:20:06 +0000)
+
+Model: Radxa ROCK 5 ITX
+MPIDR: 0x81000000
+PreSerial: 2, raw, 0xfeb50000
+DRAM:  8 GiB
+Sysmem: init
+Relocation Offset: eda3a000
+Relocation fdt: eb9f9120 - eb9fece0
+CR: M/C/I
+Using default environment
+
+DM: v2
+mmc@fe2c0000: 1, mmc@fe2e0000: 0
+Bootdev(assign): mmc 0
+MMC0: HS400 Enhanced Strobe, 200Mhz
+## Unknown partition table type 0
+PartType: <NULL>
+No misc partition
+boot mode: None
+FIT: No boot partition
+Failed to load DTB, ret=-2
+No valid DTB, ret=-22
+Failed to get kernel dtb, ret=-22
+Model: Radxa ROCK 5 ITX
+MPIDR: 0x81000000
+starting USB...
+Bus usb@fc800000: USB EHCI 1.00
+Bus usb@fc840000: USB OHCI 1.0
+Bus usb@fc880000: USB EHCI 1.00
+Bus usb@fc8c0000: USB OHCI 1.0
+scanning bus usb@fc800000 for devices... 2 USB Device(s) found
+scanning bus usb@fc840000 for devices... 1 USB Device(s) found
+scanning bus usb@fc880000 for devices... 1 USB Device(s) found
+scanning bus usb@fc8c0000 for devices... 1 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+No usb mass storage found
+CLK: (sync kernel. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)
+  b0pll 24000 KHz
+  b1pll 24000 KHz
+  lpll 24000 KHz
+  v0pll 24000 KHz
+  aupll 24000 KHz
+  cpll 1500000 KHz
+  gpll 1188000 KHz
+  npll 24000 KHz
+  ppll 1100000 KHz
+  aclk_center_root 702000 KHz
+  pclk_center_root 100000 KHz
+  hclk_center_root 396000 KHz
+  aclk_center_low_root 500000 KHz
+  aclk_top_root 750000 KHz
+  pclk_top_root 100000 KHz
+  aclk_low_top_root 396000 KHz
+Net:   No ethernet found.
+Hit key to stop autoboot('CTRL+C'):  0 
+
+Device 0: unknown device
+switch to partitions #0, OK
+mmc1 is current device
+Scanning mmc 1:1...
+Found U-Boot script /boot/boot.scr
+4231 bytes read in 13 ms (317.4 KiB/s)
+## Executing script at 00500000
+Boot script loaded from mmc 1
+Testing for existence mmc 1 /boot/armbianEnv.txt ...
+Found mmc 1 /boot/armbianEnv.txt - loading mmc 1 0x9000000 /boot/armbianEnv.txt ...
+274 bytes read in 11 ms (23.4 KiB/s)
+Loaded environment from mmc 1 /boot/armbianEnv.txt into 0x9000000 filesize 0x112...
+Importing into environment ...
+armbianEnv.txt imported into environment
+20205535 bytes read in 1644 ms (11.7 MiB/s)
+33792512 bytes read in 2735 ms (11.8 MiB/s)
+172230 bytes read in 78 ms (2.1 MiB/s)
+Trying kaslrseed command... Info: Unknown command can be safely ignored since kaslrseed does not apply to all boards.
+Unknown command 'kaslrseed' - try 'help'
+Fdt Ramdisk skip relocation
+No misc partition
+## Loading init Ramdisk from Legacy Image at 0a200000 ...
+   Image Name:   uInitrd
+   Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)
+   Data Size:    20205471 Bytes = 19.3 MiB
+   Load Address: 00000000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+## Flattened Device Tree blob at 0x08300000
+   Booting using the fdt blob at 0x08300000
+   reserving fdt memory region: addr=8300000 size=90000
+   Using Device Tree in place at 0000000008300000, end 0000000008392fff
+can't found rockchip,drm-logo, use rockchip,fb-logo
+WARNING: could not set reg FDT_ERR_BADOFFSET.
+failed to reserve fb-loader-logo memory
+WARNING: could not set reg FDT_ERR_BADOFFSET.
+Adding bank: 0x00200000 - 0xf0000000 (size: 0xefe00000)
+Adding bank: 0x100000000 - 0x200000000 (size: 0x100000000)
+Adding bank: 0x2f0000000 - 0x300000000 (size: 0x10000000)
+Total: 9758.865/10682.258 ms
+
+Starting kernel ...
+

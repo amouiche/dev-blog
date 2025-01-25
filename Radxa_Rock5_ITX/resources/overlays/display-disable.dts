@@ -1,0 +1,63 @@
+
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "radxa,rock-5-itx";
+
+	fragment@1 {
+		target-path = "/npu@fdab0000";
+		__overlay__ {
+			 status = "disabled";
+		 };
+	 };
+
+	fragment@2 {
+		target-path = "/gpu@fb000000";
+		__overlay__ {
+			 status = "disabled";
+		 };
+	 };
+
+	fragment@3 {
+		target-path = "/hdmirx-controller@fdee0000";
+		__overlay__ {
+			 status = "disabled";
+		 };
+	 };
+
+	fragment@4 {
+		target-path = "/hdmiin-sound";
+		__overlay__ {
+			 status = "disabled";
+		 };
+	 };
+
+	fragment@5 {
+		target-path = "/hdmiphy@fed60000";
+		__overlay__ {
+			 status = "disabled";
+		 };
+	 };
+
+	fragment@6 {
+		target-path = "/hdmi@fdea0000";
+		__overlay__ {
+			 status = "disabled";
+		 };
+	 };
+
+	fragment@7 {
+		target-path = "/hdmiphy@fed70000";
+		__overlay__ {
+			 status = "disabled";
+		 };
+	 };
+
+	fragment@8 {
+		target-path = "/hdmi1-sound";
+		__overlay__ {
+			 status = "disabled";
+		 };
+	 };
+};

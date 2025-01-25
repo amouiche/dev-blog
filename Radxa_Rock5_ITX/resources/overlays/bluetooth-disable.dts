@@ -1,0 +1,14 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "radxa,rock-5-itx";
+
+	fragment@1 {
+		target-path = "/serial@feb90000";
+		__overlay__ {
+			 status = "disabled";
+		 };
+	 };
+};
+
