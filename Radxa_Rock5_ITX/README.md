@@ -10,14 +10,12 @@ My QNAP TS419P+ is dying... Not only the debian kernel is no more maintained  fo
 - 8 ARMv8 cores @2+GHz (vs. single ARMv5TE @1.6Ghz)
 - Plenty of RAM (8BG vs 512KB)
 
-<img src="resources/images/radxa5itx.jpg" style="zoom:50%;" />
-
 ## Interesting stuff:
 
 ### [Hardware tweaks](hardware_tweaks.md): Serial console, boot order switch
 
-
+<img src="resources/images/radxa5itx.jpg" style="zoom:50%;" />
 
 ## My old QNAP TS419P+ 🪦
 
-<img src="/home/amo/perso/github/dev-blog/Radxa_Rock5_ITX/resources/images/TS-419P2B.png" style="zoom:50%;" />
+<img src="resources/images/TS-419P2B.png" style="zoom:50%;" />
