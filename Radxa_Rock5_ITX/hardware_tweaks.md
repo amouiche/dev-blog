@@ -11,7 +11,10 @@ Rock5 ITX provides a serial port very useful for:
 
 Since it doesn't cost a lot (<10€), I highly recommend to install one in place and keep it available all the time.
 
-The only thing to know: **Voltage is 3.3V**. (Higher voltage (eg. 5V) may harm the ITX board.)
+The things to know: 
+
+- **Voltage is 3.3V**. (Higher voltage (eg. 5V) may harm the ITX board.)
+- baurate is 1500000 Hz
 
 ![](resources/images/serial_port.jpg)
 
