@@ -29,11 +29,11 @@ Good news, there is one for Rock5 ITX: https://github.com/edk2-porting/edk2-rk35
 
 Currently, the latest image is v0.12.2: `rock-5-itx_UEFI_Release_v0.12.2.img`
 
-Bad news is that the HDMI ports don't seem to work well for some displays. It need to supports 1080p@60Hz. But it may not be sufficient since my display supports such mode, but doesn't display anything.
+Bad news is that the HDMI ports don't seem to work well for some displays. It needs to support 1080p@60Hz. But it may not be sufficient since my display supports such mode, but doesn't display anything.
 
 # Prepare the various images
 
-note: the `rkdeveloptool` used here is a patched version of the current (2025-02-)
+note: the `rkdeveloptool` used here is a patched version you can find here: https://github.com/amouiche/rkdeveloptool/releases/tag/v1.32%2Bchange_storage
 
 ## Prepare the embedded eMMC
 
