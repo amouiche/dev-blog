@@ -22,15 +22,15 @@ Rock5 ITX has a Maskrom button to force the SOC to boot in a mode where it can b
 - SPINOR erase/write/read
 - eMMC erase/write/read
 
-What is not written in documentation but available in [schematic](resources/schematics/radxa_rock_5_itx_X1100_schematic.pdf), is the possibility to select the device order.
+What is not written in documentation, but available in [schematic](resources/schematics/radxa_rock_5_itx_X1100_schematic.pdf), is the possibility to select booting the device order.
 
 ![](resources/images/boot_order.png)
 
-Level 7 is the default mode : try to boot on SPINOR, then eMMC, then SD.
+- Level 7 is the default mode : try to boot on SPINOR, then eMMC, then SD.
 
-Level 1 is the level when Maskrom key is pressed : only USB=Maskrom mode
+- Level 1 is the level when Maskrom key is pressed : only USB=Maskrom mode
 
-**Level 2 is interesting**: It allow to force booting on external SD card, even if a bootable OS is already installed. This allows to have a production system installed (eg. a working and configure NAS OS) while still being able to experiment new stuff (upgraded bootloaders, new kernels, other Linux distributions) on a SD card without touching the production system installed on eMMC or NVME drive.
+- **Level 2 is interesting**: It allows to force booting on external SD card, even if a bootable OS is already installed. This allows to have a production system installed (eg. a working and configure NAS OS) while still being able to experiment new stuff (upgraded bootloaders, new kernels, other Linux distributions) on a SD card without touching the production system installed on eMMC or NVME drive.
 
 A switch can be installed to apply a 20K resistor between BOOT_SARADC_IN0 and the ground.
 

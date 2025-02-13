@@ -9,10 +9,13 @@ My QNAP TS419P+ is dying... Not only the debian kernel is no more maintained  fo
 - 12V power supply (I can re-use the QNAP PSU)
 - 8 ARMv8 cores @2+GHz (vs. single ARMv5TE @1.6Ghz)
 - Plenty of RAM (8BG vs 512KB)
+- unbrickable : there is always a way to write the embedded flash content (SPINOR, eMMC) or boot on the external SD card, even if the flash content is completely screwed (see hardware tweaks and rkdeveloptool)
 
 ## Interesting stuff:
 
 ### [Hardware tweaks](hardware_tweaks.md): Serial console, boot order switch
+
+### [Debian Trixie Install](debian_install.md) from netinst ISO (on NVME drive or any other storage device)
 
 <img src="resources/images/radxa5itx.jpg" style="zoom:50%;" />
 
