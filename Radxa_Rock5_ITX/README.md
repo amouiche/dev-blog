@@ -13,9 +13,11 @@ My QNAP TS419P+ is dying... Not only the debian kernel is no more maintained  fo
 
 ## Interesting stuff:
 
-### [Hardware tweaks](hardware_tweaks.md): Serial console, boot order switch
+### - [Hardware tweaks](hardware_tweaks.md): Serial console, boot order switch
 
-### [Debian Trixie Install](debian_install.md) from netinst ISO (on NVME drive or any other storage device)
+### - [Armbian install on NVME drive](armbian_install_on_nvme.md)
+
+### - [Debian Trixie Install](debian_install.md) from netinst ISO (on NVME drive or any other storage device)
 
 <img src="resources/images/radxa5itx.jpg" style="zoom:50%;" />
 
