@@ -1,0 +1,19 @@
+/*
+ *  Enable UART3-M1.
+ *  On Radxa ROCK 5-ITX, UART3 is available on TP connecteor (CON6), 
+ *  TX on pin RESET and RX on pin INT.
+ */
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "radxa,rock-5
+	fragment@0 {
+		target = <&uart3>;
+		__overlay__ {
+			 status = "okay";
+			 pinctrl-0 = <&uart3m1_xfer>;
+		 };
+	 };
+};
+
